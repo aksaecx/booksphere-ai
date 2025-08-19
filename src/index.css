@@ -43,16 +43,6 @@
     --destructive: 239 68 68; /* #ef4444 */
     --destructive-foreground: 248 250 252;
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--accent)) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
-
-    /* Shadows */
-    --shadow-glow: 0 0 50px rgba(59, 130, 246, 0.3);
-    --shadow-book: 0 20px 40px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.05);
-    --shadow-card: 0 4px 20px rgba(30, 58, 138, 0.1);
-
     --radius: 0.75rem;
   }
 
@@ -82,16 +72,39 @@
     font-family: 'Playfair Display', serif;
     @apply font-semibold;
   }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar for chat messages */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 2px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground));
+  }
 }
 
 @layer components {
   /* Hero Section */
   .hero-gradient {
-    background: var(--gradient-hero);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--accent)) 100%);
   }
 
   .text-gradient {
-    background: var(--gradient-text);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -113,11 +126,19 @@
   /* Book Card 3D Effects */
   .book-card {
     @apply transform transition-all duration-500 hover:scale-105;
-    box-shadow: var(--shadow-book);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.05);
   }
 
   .book-card:hover {
-    box-shadow: var(--shadow-glow);
+    box-shadow: 0 0 50px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Line clamp utility */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   /* Floating Animation */
@@ -125,61 +146,9 @@
     animation: float 6s ease-in-out infinite;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
   /* Pulse Glow */
   .pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes pulse-glow {
-    from { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
-    to { box-shadow: 0 0 40px rgba(16, 185, 129, 0.8); }
-  }
-
-  /* Typing Animation */
-  .typing-animation {
-    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid hsl(var(--accent));
-  }
-
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  @keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: hsl(var(--accent)); }
-  }
-
-  /* Gradient Borders */
-  .gradient-border {
-    background: var(--gradient-hero);
-    padding: 2px;
-    border-radius: var(--radius);
-  }
-
-  .gradient-border > * {
-    background: hsl(var(--background));
-    border-radius: calc(var(--radius) - 2px);
-  }
-
-  /* Scroll Animations */
-  .scroll-fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-  }
-
-  .scroll-fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 

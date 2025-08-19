@@ -4,8 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, ArrowRight, Play, BookOpen, Brain, Star } from 'lucide-react';
 
 const HeroSection = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-64 h-64 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
@@ -28,7 +35,7 @@ const HeroSection = () => {
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-7xl font-serif font-bold text-white leading-tight">
                 Temukan Buku
-                <span className="block text-gradient typing-animation">Impianmu</span>
+                <span className="block text-gradient">Impianmu</span>
               </h1>
               <p className="text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl">
                 Platform penjualan buku bertenaga AI yang memahami selera bacamu. 
@@ -54,12 +61,21 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <Button 
+                size="lg" 
+                onClick={() => scrollToSection('books')}
+                className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              >
                 <Sparkles className="mr-2 h-5 w-5" />
                 Mulai Eksplorasi AI
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-full backdrop-blur-sm">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={() => scrollToSection('ai-features')}
+                className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-full backdrop-blur-sm"
+              >
                 <Play className="mr-2 h-4 w-4" />
                 Lihat Demo
               </Button>

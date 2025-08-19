@@ -7,12 +7,20 @@ import { Input } from '@/components/ui/input';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection('hero')}>
             <div className="relative">
               <Book className="h-8 w-8 text-accent animate-pulse" />
               <Sparkles className="h-4 w-4 text-secondary absolute -top-1 -right-1 animate-pulse" />
@@ -25,10 +33,24 @@ const Header = () => {
 
           {/* Navigation - Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-foreground hover:text-accent transition-colors">Beranda</a>
-            <a href="#discover" className="text-foreground hover:text-accent transition-colors">Jelajah</a>
-            <a href="#categories" className="text-foreground hover:text-accent transition-colors">Kategori</a>
-            <a href="#ai-features" className="text-foreground hover:text-accent transition-colors">AI Features</a>
+            <button 
+              onClick={() => scrollToSection('hero')} 
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              Beranda
+            </button>
+            <button 
+              onClick={() => scrollToSection('books')} 
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              Jelajah
+            </button>
+            <button 
+              onClick={() => scrollToSection('ai-features')} 
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              AI Features
+            </button>
           </nav>
 
           {/* Search Bar */}
@@ -78,10 +100,24 @@ const Header = () => {
                 className="bg-white/10 border-white/20 text-foreground placeholder:text-muted-foreground"
               />
               <nav className="flex flex-col space-y-3">
-                <a href="#home" className="text-foreground hover:text-accent transition-colors">Beranda</a>
-                <a href="#discover" className="text-foreground hover:text-accent transition-colors">Jelajah</a>
-                <a href="#categories" className="text-foreground hover:text-accent transition-colors">Kategori</a>
-                <a href="#ai-features" className="text-foreground hover:text-accent transition-colors">AI Features</a>
+                <button 
+                  onClick={() => scrollToSection('hero')} 
+                  className="text-foreground hover:text-accent transition-colors text-left"
+                >
+                  Beranda
+                </button>
+                <button 
+                  onClick={() => scrollToSection('books')} 
+                  className="text-foreground hover:text-accent transition-colors text-left"
+                >
+                  Jelajah
+                </button>
+                <button 
+                  onClick={() => scrollToSection('ai-features')} 
+                  className="text-foreground hover:text-accent transition-colors text-left"
+                >
+                  AI Features
+                </button>
               </nav>
             </div>
           </div>

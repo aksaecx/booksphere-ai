@@ -14,7 +14,6 @@ const BookShowcase = () => {
       reviews: 12543,
       price: "Rp 89.000",
       originalPrice: "Rp 120.000",
-      cover: "/api/placeholder/300/400",
       genre: "Fiction",
       mood: "Inspiring",
       aiMatch: 98
@@ -27,7 +26,6 @@ const BookShowcase = () => {
       reviews: 25431,
       price: "Rp 95.000",
       originalPrice: "Rp 125.000",
-      cover: "/api/placeholder/300/400",
       genre: "Self-Help",
       mood: "Motivational", 
       aiMatch: 95
@@ -40,7 +38,6 @@ const BookShowcase = () => {
       reviews: 18764,
       price: "Rp 110.000",
       originalPrice: "Rp 150.000",
-      cover: "/api/placeholder/300/400",
       genre: "Sci-Fi",
       mood: "Epic",
       aiMatch: 92
@@ -53,7 +50,6 @@ const BookShowcase = () => {
       reviews: 15234,
       price: "Rp 85.000",
       originalPrice: "Rp 115.000", 
-      cover: "/api/placeholder/300/400",
       genre: "Thriller",
       mood: "Suspenseful",
       aiMatch: 89
@@ -61,7 +57,7 @@ const BookShowcase = () => {
   ];
 
   return (
-    <section className="py-20 relative">
+    <section id="books" className="py-20 relative">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background"></div>
 

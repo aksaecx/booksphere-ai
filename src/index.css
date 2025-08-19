@@ -3,61 +3,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* BookSphere AI Design System */
+/* BookSphere AI Design System - Dark Blue Theme */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    /* BookSphere AI Color System - Improved Contrast */
+    /* BookSphere AI Color System - Dark Blue Theme */
     --background: 255 255 255; /* Pure white */
-    --foreground: 15 23 42; /* Dark slate for better readability */
+    --foreground: 15 23 42; /* Very dark blue */
 
-    /* Primary - Deep Ocean Blue */
-    --primary: 15 23 42; /* #0f172a - Darker for better contrast */
-    --primary-foreground: 248 250 252; /* Light text on primary */
-    --primary-light: 30 58 138; /* #1e3a8a */
-    --primary-dark: 2 6 23; /* #020617 - Very dark */
+    /* Primary - Dark Blue */
+    --primary: 30 58 138; /* #1e3a8a - Dark blue */
+    --primary-foreground: 255 255 255; /* White text on primary */
+    --primary-light: 59 130 246; /* #3b82f6 - Lighter blue */
+    --primary-dark: 15 23 42; /* #0f172a - Very dark blue */
 
-    /* Secondary - Warm Amber */
-    --secondary: 217 119 6; /* #d97706 - Darker amber */
+    /* Secondary - Medium Blue */
+    --secondary: 51 65 85; /* #334155 - Medium blue-gray */
     --secondary-foreground: 255 255 255; /* White text on secondary */
-    --secondary-light: 245 158 11; /* #f59e0b */
-    --secondary-dark: 146 64 14; /* #92400e */
+    --secondary-light: 71 85 105; /* #475569 */
+    --secondary-dark: 30 41 59; /* #1e293b */
 
-    /* Accent - Emerald Green */
-    --accent: 5 150 105; /* #059669 - Darker emerald */
+    /* Accent - Bright Blue */
+    --accent: 59 130 246; /* #3b82f6 - Bright blue */
     --accent-foreground: 255 255 255; /* White text on accent */
-    --accent-light: 16 185 129; /* #10b981 */
-    --accent-dark: 4 120 87; /* #047857 */
+    --accent-light: 147 197 253; /* #93c5fd */
+    --accent-dark: 29 78 216; /* #1d4ed8 */
 
-    /* Neutrals - Better contrast */
-    --muted: 248 250 252; /* #f8fafc */
-    --muted-foreground: 71 85 105; /* #475569 - Darker for readability */
+    /* Neutrals */
+    --muted: 248 250 252; /* #f8fafc - Very light gray */
+    --muted-foreground: 100 116 139; /* #64748b - Medium gray */
     --card: 255 255 255; /* Pure white */
-    --card-foreground: 15 23 42; /* Dark text */
-    --border: 203 213 225; /* #cbd5e1 - More visible border */
+    --card-foreground: 15 23 42; /* Very dark blue */
+    --border: 226 232 240; /* #e2e8f0 - Light gray border */
     --input: 248 250 252; /* Light input background */
-    --ring: 15 23 42; /* Dark ring */
+    --ring: 59 130 246; /* Bright blue ring */
 
     /* Destructive */
-    --destructive: 220 38 38; /* #dc2626 */
-    --destructive-foreground: 248 250 252;
+    --destructive: 239 68 68; /* #ef4444 */
+    --destructive-foreground: 255 255 255;
 
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 2 6 23; /* Very dark slate */
+    --background: 15 23 42; /* Very dark blue */
     --foreground: 248 250 252; /* Light text */
-    --card: 15 23 42; /* Dark card */
+    --card: 30 41 59; /* Dark blue card */
     --card-foreground: 248 250 252; /* Light text on card */
-    --muted: 30 41 59; /* Dark muted */
+    --muted: 51 65 85; /* Dark blue muted */
     --muted-foreground: 148 163 184; /* Light muted text */
-    --border: 30 41 59; /* Dark border */
-    --input: 30 41 59; /* Dark input */
-    --primary: 59 130 246; /* Brighter blue for dark mode */
-    --secondary: 245 158 11; /* Brighter amber for dark mode */
-    --accent: 34 197 94; /* Brighter green for dark mode */
+    --border: 51 65 85; /* Dark blue border */
+    --input: 51 65 85; /* Dark blue input */
+    --primary: 59 130 246; /* Bright blue for dark mode */
+    --secondary: 100 116 139; /* Gray blue for dark mode */
+    --accent: 147 197 253; /* Light blue for dark mode */
   }
 }
 
@@ -76,12 +76,10 @@
     @apply font-semibold text-foreground;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Hide scrollbar for chat messages */
   .overflow-y-auto::-webkit-scrollbar {
     width: 4px;
   }
@@ -103,7 +101,7 @@
 @layer components {
   /* Hero Section */
   .hero-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--accent)) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary-dark)) 0%, hsl(var(--primary)) 50%, hsl(var(--accent)) 100%);
   }
 
   .text-gradient {
@@ -113,11 +111,11 @@
     background-clip: text;
   }
 
-  /* Glassmorphism - Improved */
+  /* Glassmorphism */
   .glass {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(203, 213, 225, 0.3);
+    border: 1px solid rgba(226, 232, 240, 0.3);
   }
 
   .glass-dark {
@@ -126,7 +124,7 @@
     border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
-  /* Book Card 3D Effects */
+  /* Book Card Effects */
   .book-card {
     @apply transform transition-all duration-500 hover:scale-105 hover:shadow-xl;
     box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1), 0 4px 10px rgba(15, 23, 42, 0.05);
@@ -136,7 +134,6 @@
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15), 0 8px 16px rgba(15, 23, 42, 0.1);
   }
 
-  /* Line clamp utility */
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
@@ -144,17 +141,7 @@
     -webkit-line-clamp: 2;
   }
 
-  /* Floating Animation */
-  .float-animation {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  /* Pulse Glow */
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite alternate;
-  }
-
-  /* Better button styles */
+  /* Button styles */
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-primary-dark transition-colors duration-200;
   }

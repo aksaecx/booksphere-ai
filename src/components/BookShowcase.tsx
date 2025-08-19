@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Star, Heart, ShoppingCart, Eye, Filter, Grid, List } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Filter, Grid, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -21,8 +21,6 @@ const BookShowcase = () => {
       price: "Rp 89.000",
       originalPrice: "Rp 120.000",
       genre: "Fiction",
-      mood: "Inspiring",
-      aiMatch: 98,
       category: "fiction",
       description: "Antara hidup dan mati ada perpustakaan, dan di rak-raknya terdapat cerita-cerita yang mungkin Anda jalani."
     },
@@ -35,8 +33,6 @@ const BookShowcase = () => {
       price: "Rp 95.000",
       originalPrice: "Rp 125.000",
       genre: "Self-Help",
-      mood: "Motivational", 
-      aiMatch: 95,
       category: "self-help",
       description: "Panduan praktis untuk membangun kebiasaan baik dan menghilangkan kebiasaan buruk."
     },
@@ -49,8 +45,6 @@ const BookShowcase = () => {
       price: "Rp 110.000",
       originalPrice: "Rp 150.000",
       genre: "Sci-Fi",
-      mood: "Epic",
-      aiMatch: 92,
       category: "sci-fi",
       description: "Epik fiksi ilmiah yang mengisahkan perjuangan politik dan spiritual di planet gurun Arrakis."
     },
@@ -63,8 +57,6 @@ const BookShowcase = () => {
       price: "Rp 85.000",
       originalPrice: "Rp 115.000", 
       genre: "Thriller",
-      mood: "Suspenseful",
-      aiMatch: 89,
       category: "thriller",
       description: "Thriller psikologis tentang seorang wanita yang menolak berbicara setelah membunuh suaminya."
     },
@@ -77,8 +69,6 @@ const BookShowcase = () => {
       price: "Rp 120.000",
       originalPrice: "Rp 160.000",
       genre: "Biography",
-      mood: "Inspirational",
-      aiMatch: 94,
       category: "self-help",
       description: "Memoar intim dan kuat dari mantan First Lady Amerika Serikat."
     },
@@ -91,8 +81,6 @@ const BookShowcase = () => {
       price: "Rp 99.000",
       originalPrice: "Rp 130.000",
       genre: "Sci-Fi",
-      mood: "Adventure",
-      aiMatch: 91,
       category: "sci-fi",
       description: "Petualangan luar angkasa yang mendebarkan tentang misi menyelamatkan umat manusia."
     }
@@ -110,22 +98,17 @@ const BookShowcase = () => {
     );
   };
 
-  const addToCart = (bookId: number) => {
-    console.log('Added to cart:', bookId);
-    // Here you would implement actual cart functionality
-  };
-
   return (
     <section id="books" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 space-y-6">
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground">
-            Rekomendasi AI
-            <span className="text-gradient block">Khusus Untukmu</span>
+            Koleksi Buku
+            <span className="text-gradient block">Terpilih</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Buku-buku pilihan yang dipersonalisasi berdasarkan preferensi dan mood Anda
+            Temukan buku-buku terbaik dari berbagai genre dan penulis terkenal
           </p>
         </div>
 
@@ -142,7 +125,7 @@ const BookShowcase = () => {
                   onClick={() => setSelectedCategory(category)}
                   className={`rounded-full capitalize ${
                     selectedCategory === category 
-                      ? 'bg-primary text-primary-foreground' 
+                      ? 'btn-primary' 
                       : 'text-foreground border-border hover:bg-muted'
                   }`}
                 >
@@ -189,16 +172,8 @@ const BookShowcase = () => {
                     <p className="text-xs opacity-80">{book.author}</p>
                   </div>
                   
-                  {/* AI Match Badge */}
-                  <div className="absolute top-3 right-3 bg-accent text-accent-foreground text-xs font-bold px-2 py-1 rounded-full">
-                    {book.aiMatch}% Match
-                  </div>
-
                   {/* Hover Actions */}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-3">
-                    <Button size="sm" variant="secondary" className="rounded-full" onClick={() => console.log('Quick view:', book.id)}>
-                      <Eye className="h-4 w-4" />
-                    </Button>
                     <Button 
                       size="sm" 
                       variant="secondary" 
@@ -231,7 +206,7 @@ const BookShowcase = () => {
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star 
                         key={star} 
-                        className={`h-4 w-4 ${star <= Math.floor(book.rating) ? 'text-secondary fill-current' : 'text-muted-foreground/30'}`} 
+                        className={`h-4 w-4 ${star <= Math.floor(book.rating) ? 'text-yellow-500 fill-current' : 'text-muted-foreground/30'}`} 
                       />
                     ))}
                   </div>
@@ -239,13 +214,10 @@ const BookShowcase = () => {
                   <span className="text-xs text-muted-foreground">({book.reviews.toLocaleString()})</span>
                 </div>
 
-                {/* Genre & Mood Tags */}
+                {/* Genre Tag */}
                 <div className="flex flex-wrap gap-2">
                   <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full border border-primary/20">
                     {book.genre}
-                  </span>
-                  <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded-full border border-accent/20">
-                    {book.mood}
                   </span>
                 </div>
 
@@ -259,8 +231,7 @@ const BookShowcase = () => {
 
                 {/* Add to Cart Button */}
                 <Button 
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary-dark rounded-full font-semibold"
-                  onClick={() => addToCart(book.id)}
+                  className="w-full btn-primary rounded-full font-semibold"
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" />
                   Tambah ke Keranjang
@@ -273,7 +244,7 @@ const BookShowcase = () => {
         {/* Call to Action */}
         <div className="text-center mt-16">
           <Button size="lg" variant="outline" className="px-8 py-4 rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            Lihat Semua Rekomendasi AI
+            Lihat Semua Buku
           </Button>
         </div>
       </div>

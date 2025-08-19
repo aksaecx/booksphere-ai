@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, ShoppingCart, User, Book, Sparkles, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, User, Book, Menu, X, LogIn, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -22,11 +22,10 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection('hero')}>
             <div className="relative">
-              <Book className="h-8 w-8 text-accent" />
-              <Sparkles className="h-4 w-4 text-secondary absolute -top-1 -right-1" />
+              <Book className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h1 className="text-2xl font-serif font-bold text-foreground">BookSphere</h1>
+              <h1 className="text-2xl font-serif font-bold text-primary">BookSphere</h1>
               <p className="text-xs text-muted-foreground -mt-1">AI-Powered</p>
             </div>
           </div>
@@ -35,19 +34,19 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('hero')} 
-              className="text-foreground hover:text-accent transition-colors font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium"
             >
               Beranda
             </button>
             <button 
               onClick={() => scrollToSection('books')} 
-              className="text-foreground hover:text-accent transition-colors font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium"
             >
               Jelajah
             </button>
             <button 
               onClick={() => scrollToSection('ai-features')} 
-              className="text-foreground hover:text-accent transition-colors font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium"
             >
               AI Features
             </button>
@@ -58,25 +57,29 @@ const Header = () => {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input 
-                placeholder="Tanya AI: 'Buku tentang petualangan fantasi...'" 
+                placeholder="Cari buku..." 
                 className="pl-10 pr-4 bg-background border-border text-foreground placeholder:text-muted-foreground"
               />
-              <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                <Sparkles className="h-4 w-4 text-accent" />
-              </div>
             </div>
           </div>
 
           {/* Actions */}
           <div className="flex items-center space-x-3">
+            {/* Login Buttons */}
+            <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted hidden sm:flex">
+              <LogIn className="h-4 w-4 mr-2" />
+              Login
+            </Button>
+            <Button size="sm" className="btn-primary hidden sm:flex">
+              <UserPlus className="h-4 w-4 mr-2" />
+              Daftar
+            </Button>
+            
             <Button variant="ghost" size="sm" className="relative text-foreground hover:bg-muted">
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 bg-secondary text-secondary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                3
+              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                0
               </span>
-            </Button>
-            <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted">
-              <User className="h-5 w-5" />
             </Button>
             
             {/* Mobile Menu Button */}
@@ -96,29 +99,39 @@ const Header = () => {
           <div className="md:hidden mt-4 pt-4 border-t border-border/30 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <Input 
-                placeholder="Cari buku dengan AI..." 
+                placeholder="Cari buku..." 
                 className="bg-background border-border text-foreground placeholder:text-muted-foreground"
               />
               <nav className="flex flex-col space-y-3">
                 <button 
                   onClick={() => scrollToSection('hero')} 
-                  className="text-foreground hover:text-accent transition-colors text-left font-medium"
+                  className="text-foreground hover:text-primary transition-colors text-left font-medium"
                 >
                   Beranda
                 </button>
                 <button 
                   onClick={() => scrollToSection('books')} 
-                  className="text-foreground hover:text-accent transition-colors text-left font-medium"
+                  className="text-foreground hover:text-primary transition-colors text-left font-medium"
                 >
                   Jelajah
                 </button>
                 <button 
                   onClick={() => scrollToSection('ai-features')} 
-                  className="text-foreground hover:text-accent transition-colors text-left font-medium"
+                  className="text-foreground hover:text-primary transition-colors text-left font-medium"
                 >
                   AI Features
                 </button>
               </nav>
+              <div className="flex flex-col space-y-2 pt-3 border-t border-border/30">
+                <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted justify-start">
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Login
+                </Button>
+                <Button size="sm" className="btn-primary justify-start">
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Daftar
+                </Button>
+              </div>
             </div>
           </div>
         )}

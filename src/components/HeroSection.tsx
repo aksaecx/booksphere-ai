@@ -1,144 +1,188 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Search, Sparkles, TrendingUp, Users, BookOpen, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sparkles, ArrowRight, Play, BookOpen, Brain, Star } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
 
 const HeroSection = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      console.log('Searching for:', searchQuery);
+      // Here you would implement actual search functionality
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const stats = [
+    { icon: BookOpen, label: 'Koleksi Buku', value: '50,000+', color: 'text-accent' },
+    { icon: Users, label: 'Pembaca Aktif', value: '25,000+', color: 'text-secondary' },
+    { icon: TrendingUp, label: 'Rating AI', value: '98%', color: 'text-accent' }
+  ];
+
+  const quickSearches = [
+    'Novel romantis',
+    'Buku motivasi',
+    'Sci-fi terbaru',
+    'Biografi inspiratif'
+  ];
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl"></div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"></div>
+      <div className="absolute top-20 right-20 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse"></div>
 
       <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left space-y-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Column - Content */}
+          <div className="space-y-8 text-center lg:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 border border-white/20">
-              <Brain className="h-4 w-4 text-accent" />
-              <span className="text-sm font-medium text-white">Powered by Advanced AI</span>
-              <Sparkles className="h-4 w-4 text-secondary animate-pulse" />
+            <div className="inline-flex items-center space-x-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium border border-accent/20">
+              <Sparkles className="h-4 w-4" />
+              <span>Platform Buku Bertenaga AI Terdepan</span>
             </div>
 
-            {/* Main Heading */}
+            {/* Main Title */}
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-serif font-bold text-white leading-tight">
+              <h1 className="text-5xl lg:text-7xl font-serif font-bold text-foreground leading-tight">
                 Temukan Buku
                 <span className="block text-gradient">Impianmu</span>
               </h1>
-              <p className="text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl">
-                Platform penjualan buku bertenaga AI yang memahami selera bacamu. 
-                Dari mood hingga minat, kami bantu temukan buku yang tepat untukmu.
+              <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl">
+                AI Personal Librarian yang memahami selera bacamu. 
+                Dapatkan rekomendasi buku yang sempurna berdasarkan mood dan preferensi unik Anda.
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="flex flex-wrap gap-8 justify-center lg:justify-start">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">50K+</div>
-                <div className="text-white/70 text-sm">Buku Digital</div>
+            {/* AI Search Bar */}
+            <div className="space-y-4">
+              <div className="relative max-w-2xl mx-auto lg:mx-0">
+                <div className="flex items-center space-x-3 bg-card border border-border rounded-2xl p-2 shadow-lg">
+                  <div className="flex-1 flex items-center space-x-3">
+                    <Search className="h-5 w-5 text-muted-foreground ml-3" />
+                    <Input
+                      placeholder="Tanya AI: 'Buku tentang perjalanan waktu yang tidak terlalu rumit...'"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      className="border-0 bg-transparent text-foreground placeholder:text-muted-foreground focus-visible:ring-0 text-lg"
+                    />
+                  </div>
+                  <Button
+                    onClick={handleSearch}
+                    className="bg-gradient-to-r from-primary to-accent text-white rounded-xl px-6 py-3 font-semibold hover:shadow-lg transition-all duration-200"
+                  >
+                    <Sparkles className="mr-2 h-5 w-5" />
+                    Tanya AI
+                  </Button>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">98%</div>
-                <div className="text-white/70 text-sm">Akurasi AI</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">24/7</div>
-                <div className="text-white/70 text-sm">AI Assistant</div>
+
+              {/* Quick Search Tags */}
+              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                <span className="text-sm text-muted-foreground mr-2">Populer:</span>
+                {quickSearches.map((search, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSearchQuery(search)}
+                    className="rounded-full text-foreground border-border hover:bg-accent/10 hover:border-accent"
+                  >
+                    {search}
+                  </Button>
+                ))}
               </div>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                size="lg" 
-                onClick={() => scrollToSection('books')}
-                className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                <Sparkles className="mr-2 h-5 w-5" />
-                Mulai Eksplorasi AI
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-dark rounded-full px-8 py-4 text-lg font-semibold">
+                Mulai Jelajahi
+                <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={() => scrollToSection('ai-features')}
-                className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-full backdrop-blur-sm"
-              >
-                <Play className="mr-2 h-4 w-4" />
-                Lihat Demo
+              <Button variant="outline" size="lg" className="border-border text-foreground hover:bg-muted rounded-full px-8 py-4 text-lg">
+                Lihat Demo AI
               </Button>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex items-center space-x-4 justify-center lg:justify-start">
-              <div className="flex items-center space-x-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="h-4 w-4 text-secondary fill-current" />
-                ))}
-              </div>
-              <span className="text-white/70 text-sm">4.9/5 dari 10K+ pengguna</span>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center lg:text-left">
+                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 ${stat.color} mb-2`}>
+                    <stat.icon className="h-6 w-6" />
+                  </div>
+                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Visual Elements */}
-          <div className="relative flex justify-center">
-            {/* Main Book Display */}
-            <div className="relative">
-              {/* Floating Books */}
-              <div className="absolute -top-10 -left-10 glass-dark rounded-lg p-4 float-animation">
-                <BookOpen className="h-8 w-8 text-accent" />
-              </div>
-              <div className="absolute -bottom-10 -right-10 glass-dark rounded-lg p-4 float-animation delay-1000">
-                <Brain className="h-8 w-8 text-secondary" />
-              </div>
-
-              {/* Central Book Stack */}
-              <div className="relative transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="book-card bg-white rounded-lg p-8 w-80 h-96 flex flex-col justify-center items-center space-y-4">
-                  <div className="w-full h-48 bg-gradient-hero rounded-lg flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <BookOpen className="h-16 w-16 mx-auto mb-4" />
-                      <h3 className="font-serif text-xl font-bold">AI Recommendations</h3>
-                      <p className="text-sm opacity-90">Personal & Cerdas</p>
+          {/* Right Column - Visual */}
+          <div className="relative">
+            {/* Floating Book Cards */}
+            <div className="relative h-[600px] flex items-center justify-center">
+              {/* Main Featured Book */}
+              <Card className="absolute z-20 w-64 h-80 book-card bg-gradient-to-br from-primary to-accent rounded-2xl shadow-2xl">
+                <CardContent className="p-6 h-full flex flex-col justify-between text-center">
+                  <div>
+                    <div className="w-16 h-20 bg-white/20 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                      <BookOpen className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-white font-serif text-xl font-bold mb-2">AI Recommendations</h3>
+                    <p className="text-white/80 text-sm">Personalized just for you</p>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-white/80 text-xs">
+                      <span>AI Match</span>
+                      <span className="font-bold">98%</span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div className="bg-white rounded-full h-2 w-[98%]"></div>
                     </div>
                   </div>
-                  <div className="text-center space-y-2">
-                    <h4 className="font-serif text-lg font-semibold text-primary">Buku Pilihan AI</h4>
-                    <p className="text-sm text-muted-foreground">Disesuaikan dengan preferensi dan mood Anda</p>
+                </CardContent>
+              </Card>
+
+              {/* Floating Side Books */}
+              <Card className="absolute -top-4 -left-8 z-10 w-48 h-64 book-card bg-card border-border shadow-xl rounded-xl float-animation">
+                <CardContent className="p-4 text-center">
+                  <div className="w-12 h-16 bg-secondary/20 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                    <BookOpen className="h-6 w-6 text-secondary" />
                   </div>
-                </div>
-              </div>
+                  <h4 className="font-semibold text-foreground text-sm mb-1">The Midnight Library</h4>
+                  <p className="text-muted-foreground text-xs">Matt Haig</p>
+                  <div className="mt-2 text-accent text-xs font-bold">95% Match</div>
+                </CardContent>
+              </Card>
 
-              {/* Orbiting Elements */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-accent/20 rounded-full animate-ping"></div>
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-8 h-8 bg-secondary/20 rounded-full animate-pulse"></div>
-                <div className="absolute top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-primary-light/20 rounded-full animate-bounce"></div>
-                <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white/20 rounded-full animate-pulse"></div>
-              </div>
+              <Card className="absolute -bottom-8 -right-4 z-10 w-48 h-64 book-card bg-card border-border shadow-xl rounded-xl float-animation" style={{animationDelay: '2s'}}>
+                <CardContent className="p-4 text-center">
+                  <div className="w-12 h-16 bg-accent/20 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                    <BookOpen className="h-6 w-6 text-accent" />
+                  </div>
+                  <h4 className="font-semibold text-foreground text-sm mb-1">Atomic Habits</h4>
+                  <p className="text-muted-foreground text-xs">James Clear</p>
+                  <div className="mt-2 text-secondary text-xs font-bold">92% Match</div>
+                </CardContent>
+              </Card>
+
+              {/* Sparkle Effects */}
+              <Sparkles className="absolute top-10 right-20 h-6 w-6 text-accent animate-pulse" />
+              <Sparkles className="absolute bottom-20 left-10 h-4 w-4 text-secondary animate-pulse" style={{animationDelay: '1s'}} />
+              <Sparkles className="absolute top-1/3 left-1/4 h-5 w-5 text-accent animate-pulse" style={{animationDelay: '3s'}} />
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="flex flex-col items-center space-y-2 text-white/70">
-          <span className="text-sm">Scroll untuk eksplorasi</span>
-          <div className="w-1 h-8 bg-white/30 rounded-full">
-            <div className="w-1 h-3 bg-accent rounded-full animate-bounce"></div>
           </div>
         </div>
       </div>

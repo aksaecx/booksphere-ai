@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 
 const AIAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Halo! Saya asisten AI BookSphere. Ada yang bisa saya bantu untuk menemukan buku yang Anda cari?",
+      text: "Halo! Ada yang bisa saya bantu?",
       sender: 'ai'
     }
   ]);
@@ -27,11 +27,11 @@ const AIAssistant = () => {
       setMessages([...messages, newMessage]);
       setInputMessage('');
       
-      // Simulate AI response
+      // Simple response
       setTimeout(() => {
         const aiResponse = {
           id: messages.length + 2,
-          text: "Terima kasih atas pertanyaannya! Saat ini saya dalam mode demo. Untuk fitur AI yang lengkap, hubungi administrator.",
+          text: "Terima kasih! Untuk informasi lengkap, silakan hubungi customer service kami.",
           sender: 'ai'
         };
         setMessages(prev => [...prev, aiResponse]);
@@ -45,43 +45,40 @@ const AIAssistant = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full btn-primary shadow-lg hover:shadow-xl transition-all duration-300"
+          className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full btn-primary shadow-lg"
         >
-          <MessageCircle className="h-6 w-6" />
+          <MessageCircle className="h-5 w-5" />
         </Button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 z-50 w-80 h-96 shadow-xl border-border bg-card animate-scale-in">
-          <div className="flex items-center justify-between p-4 border-b border-border bg-primary text-primary-foreground rounded-t-lg">
-            <div className="flex items-center space-x-2">
-              <MessageCircle className="h-5 w-5" />
-              <span className="font-semibold">AI Assistant</span>
-            </div>
+        <Card className="fixed bottom-6 right-6 z-50 w-80 h-96 shadow-xl border">
+          <div className="flex items-center justify-between p-4 bg-primary text-white rounded-t-lg">
+            <span className="font-medium">Chat Support</span>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(false)}
-              className="text-primary-foreground hover:bg-primary-light"
+              className="text-white hover:bg-white/20"
             >
               <X className="h-4 w-4" />
             </Button>
           </div>
 
           {/* Messages */}
-          <CardContent className="flex-1 p-4 overflow-y-auto max-h-64">
-            <div className="space-y-4">
+          <div className="flex-1 p-4 overflow-y-auto h-64">
+            <div className="space-y-3">
               {messages.map((message) => (
                 <div
                   key={message.id}
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[70%] p-3 rounded-lg text-sm ${
+                    className={`max-w-[80%] p-2 rounded-lg text-sm ${
                       message.sender === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground'
+                        ? 'bg-primary text-white'
+                        : 'bg-gray-100 text-gray-800'
                     }`}
                   >
                     {message.text}
@@ -89,10 +86,10 @@ const AIAssistant = () => {
                 </div>
               ))}
             </div>
-          </CardContent>
+          </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-border">
+          <div className="p-4 border-t">
             <div className="flex space-x-2">
               <Input
                 value={inputMessage}
